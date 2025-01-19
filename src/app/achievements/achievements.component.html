@@ -1,0 +1,5 @@
+@let user = authService.user();
+
+@if (user) {
+  <p>Logged in as {{ user.displayName }}</p>
+}

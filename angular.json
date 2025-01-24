@@ -5,11 +5,15 @@
     "packageManager": "pnpm",
     "schematicCollections": [
       "angular-eslint"
-    ]
+    ],
+    "analytics": false
   },
   "newProjectRoot": "projects",
   "projects": {
     "st-achievements-front-end": {
+      "i18n": {
+        "sourceLocale": "pt-BR"
+      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {

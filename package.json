@@ -2,7 +2,7 @@
   "name": "st-achievements-front-end",
   "version": "0.0.0",
   "scripts": {
-    "dev": "ng serve",
+    "dev": "ng serve --no-hmr",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",

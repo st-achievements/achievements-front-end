@@ -1,0 +1,37 @@
+@let ach = achievement();
+
+<mat-list-item>
+  <img
+    matListItemAvatar
+    [ngSrc]="
+      ach.achievementImageUrl ||
+      'https://cdn.fastly.steamstatic.com/steamcommunity/public/images/apps/500/2c92650ca214271a191e37c54e2ae9c92d82e160.jpg'
+    "
+    [alt]="ach.achievementDescription"
+    height="40"
+    width="40"
+  />
+  <span matListItemTitle>
+    {{ ach.achievementName }}
+  </span>
+  <span matListItemLine>
+    {{ ach.achievementDescription }}
+  </span>
+
+  @if (ach.achievedAt) {
+    <span matListItemLine>
+      Feito em {{ ach.achievedAt | date: 'medium' }}
+    </span>
+  }
+
+  @if (ach.progress) {
+    <span matListItemLine>
+      {{ ach.progress.quantity | number: '1.0-0' }} /
+      {{ ach.progress.required | number: '1.0-0' }}
+      <mat-progress-bar
+        mode="determinate"
+        [value]="(ach.progress.quantity / ach.progress.required) * 100"
+      />
+    </span>
+  }
+</mat-list-item>

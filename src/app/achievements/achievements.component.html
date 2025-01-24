@@ -1,5 +1,37 @@
+<app-navbar />
+
 @let user = authService.user();
 
-@if (user) {
-  <p>Logged in as {{ user.displayName }}</p>
+<p>Logged in as {{ user.username }}</p>
+{{ year() }}
+
+<input [(ngModel)]="year" [ngModelOptions]="{ updateOn: 'blur' }" />
+
+@let achievements = achievements$ | async;
+
+@if (achievements) {
+  <mat-list>
+    <div mat-subheader>Completo</div>
+
+    @for (
+      achievement of achievements.completed;
+      track achievement.achievementId
+    ) {
+      <app-achievement-item [achievement]="achievement"></app-achievement-item>
+    } @empty {
+      <p>Nenhum troféu completo!</p>
+    }
+    <mat-divider />
+
+    <div mat-subheader>Incompletos</div>
+
+    @for (
+      achievement of achievements.progress;
+      track achievement.achievementId
+    ) {
+      <app-achievement-item [achievement]="achievement"></app-achievement-item>
+    } @empty {
+      <p>Nenhum troféu incompleto!</p>
+    }
+  </mat-list>
 }

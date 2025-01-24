@@ -1,0 +1,13 @@
+<nav>
+  <p>Achievements</p>
+  <div class="flex-spacer"></div>
+  <div>
+    <button mat-fab extended [matMenuTriggerFor]="menu">
+      {{ user().username }}
+      <mat-icon>person</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>
+  </div>
+</nav>

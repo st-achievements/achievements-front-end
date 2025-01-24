@@ -12,7 +12,13 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { AuthenticationService } from './authentication.service';
 import { take } from 'rxjs';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+} from '@angular/common/http';
+import { AuthenticationInterceptor } from './authentication.interceptor';
+import { LoadingInterceptor } from './loading.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -34,6 +40,9 @@ export const appConfig: ApplicationConfig = {
       const authenticationService = inject(AuthenticationService);
       return authenticationService.firstAuthSignal.pipe(take(1));
     }),
-    provideHttpClient(withFetch()),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([LoadingInterceptor(), AuthenticationInterceptor()]),
+    ),
   ],
 };

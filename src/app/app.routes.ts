@@ -20,6 +20,7 @@ export const routes: Routes = [
     resolve: {
       achievements: AchievementsResolver(),
     },
+    runGuardsAndResolvers: 'always',
   },
   {
     path: '**',

@@ -12,7 +12,7 @@
   "projects": {
     "st-achievements-front-end": {
       "i18n": {
-        "sourceLocale": "pt-BR"
+        "sourceLocale": "pt"
       },
       "projectType": "application",
       "schematics": {

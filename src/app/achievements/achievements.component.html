@@ -1,11 +1,17 @@
 <app-navbar />
 
-@let user = authService.user();
+<mat-form-field>
+  <mat-label>Ano</mat-label>
+  <mat-select [(ngModel)]="periodSelected">
+    @for (period of periods(); track period.periodId) {
+      <mat-option id="{{ period.periodId }}" [value]="period">
+        {{ period.year }}
+      </mat-option>
+    }
+  </mat-select>
+</mat-form-field>
 
-<p>Logged in as {{ user.username }}</p>
-{{ year() }}
-
-<input [(ngModel)]="year" [ngModelOptions]="{ updateOn: 'blur' }" />
+{{ periodSelected() | json }}
 
 @let achievements = achievements$ | async;
 

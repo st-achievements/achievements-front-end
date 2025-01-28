@@ -1,7 +1,7 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { AuthenticationService } from './authentication.service';
-import { from, switchMap } from 'rxjs';
+import { from, share, switchMap } from 'rxjs';
 
 export function AuthenticationInterceptor(): HttpInterceptorFn {
   return (req, next) => {
@@ -10,6 +10,7 @@ export function AuthenticationInterceptor(): HttpInterceptorFn {
       authenticationService.userFirebase()?.getIdToken() ??
       Promise.resolve(null);
     return from(tokenPromise).pipe(
+      share({}),
       switchMap((token) => {
         let headers = req.headers;
         if (token) {

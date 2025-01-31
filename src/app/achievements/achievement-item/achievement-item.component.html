@@ -11,6 +11,12 @@
     height="40"
     width="40"
   />
+  @if (ach.achievedAt) {
+    <div matListItemMeta>
+      <mat-icon [class]="['trophy', levelClassName()]">emoji_events</mat-icon>
+    </div>
+  }
+
   <span matListItemTitle>
     {{ ach.achievementName }}
   </span>

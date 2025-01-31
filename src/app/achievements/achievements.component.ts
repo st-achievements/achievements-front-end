@@ -5,7 +5,7 @@ import {
   inject,
   linkedSignal,
 } from '@angular/core';
-import { AsyncPipe, JsonPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -24,6 +24,7 @@ import {
 } from '@angular/material/select';
 import { Period } from '../model/Period';
 import { RouteParams } from '../route.params';
+import { MatCard } from '@angular/material/card';
 
 @Component({
   selector: 'app-achievements',
@@ -39,7 +40,7 @@ import { RouteParams } from '../route.params';
     MatOption,
     MatFormField,
     MatLabel,
-    JsonPipe,
+    MatCard,
   ],
   templateUrl: './achievements.component.html',
   styleUrl: './achievements.component.css',

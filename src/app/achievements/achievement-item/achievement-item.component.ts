@@ -1,13 +1,21 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+} from '@angular/core';
 import { Achievement } from '../../model/Achievement';
 import { DatePipe, DecimalPipe, NgOptimizedImage } from '@angular/common';
 import {
   MatListItem,
   MatListItemAvatar,
   MatListItemLine,
+  MatListItemMeta,
   MatListItemTitle,
 } from '@angular/material/list';
 import { MatProgressBar } from '@angular/material/progress-bar';
+import { MatIcon } from '@angular/material/icon';
+import { AchievementLevelEnum } from '../../model/AchievementLevelEnum';
 
 @Component({
   selector: 'app-achievement-item',
@@ -24,6 +32,8 @@ import { MatProgressBar } from '@angular/material/progress-bar';
     NgOptimizedImage,
     MatProgressBar,
     DecimalPipe,
+    MatIcon,
+    MatListItemMeta,
   ],
   templateUrl: './achievement-item.component.html',
   styleUrl: './achievement-item.component.css',
@@ -31,4 +41,15 @@ import { MatProgressBar } from '@angular/material/progress-bar';
 })
 export class AchievementItemComponent {
   readonly achievement = input.required<Achievement>();
+
+  private readonly levelClassNames: Record<number, string> = {
+    [AchievementLevelEnum.Bronze]: 'bronze',
+    [AchievementLevelEnum.Silver]: 'silver',
+    [AchievementLevelEnum.Gold]: 'gold',
+    [AchievementLevelEnum.Platinum]: 'platinum',
+  };
+
+  readonly levelClassName = computed(
+    () => this.levelClassNames[this.achievement().achievementLevelId],
+  );
 }

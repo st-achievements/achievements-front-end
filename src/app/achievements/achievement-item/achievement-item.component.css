@@ -1,0 +1,25 @@
+:host {
+  display: block;
+  border-radius: 6px;
+  margin-bottom: 0.25rem;
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+  background-color: var(--mat-sys-background);
+  transition: background 0.3s;
+
+  &:hover {
+    background-color: var(--mat-sys-secondary-container);
+  }
+}
+
+.trophy {
+  &.bronze {
+    color: #cd7f32;
+  }
+  &.silver {
+    color: silver;
+  }
+  &.gold {
+    color: gold;
+  }
+}

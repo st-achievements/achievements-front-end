@@ -1,43 +1,49 @@
 <app-navbar />
 
-<mat-form-field>
-  <mat-label>Ano</mat-label>
-  <mat-select [(ngModel)]="periodSelected">
-    @for (period of periods(); track period.periodId) {
-      <mat-option id="{{ period.periodId }}" [value]="period">
-        {{ period.year }}
-      </mat-option>
-    }
-  </mat-select>
-</mat-form-field>
-
-{{ periodSelected() | json }}
+<section class="control-panel">
+  <mat-form-field>
+    <mat-label>Ano</mat-label>
+    <mat-select [(ngModel)]="periodSelected">
+      @for (period of periods(); track period.periodId) {
+        <mat-option id="{{ period.periodId }}" [value]="period">
+          {{ period.year }}
+        </mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</section>
 
 @let achievements = achievements$ | async;
 
 @if (achievements) {
-  <mat-list>
-    <div mat-subheader>Completo</div>
+  <mat-card>
+    <mat-list>
+      <div mat-subheader>Completos</div>
 
-    @for (
-      achievement of achievements.completed;
-      track achievement.achievementId
-    ) {
-      <app-achievement-item [achievement]="achievement"></app-achievement-item>
-    } @empty {
-      <p>Nenhum troféu completo!</p>
-    }
-    <mat-divider />
+      @for (
+        achievement of achievements.completed;
+        track achievement.achievementId
+      ) {
+        <app-achievement-item
+          [achievement]="achievement"
+        ></app-achievement-item>
+      } @empty {
+        <p>Nenhum troféu completo!</p>
+      }
+      <mat-divider />
 
-    <div mat-subheader>Incompletos</div>
+      <div mat-subheader>Incompletos</div>
 
-    @for (
-      achievement of achievements.progress;
-      track achievement.achievementId
-    ) {
-      <app-achievement-item [achievement]="achievement"></app-achievement-item>
-    } @empty {
-      <p>Nenhum troféu incompleto!</p>
-    }
-  </mat-list>
+      @for (
+        achievement of achievements.progress;
+        track achievement.achievementId
+      ) {
+        <app-achievement-item
+          [achievement]="achievement"
+        ></app-achievement-item>
+      } @empty {
+        <p>Nenhum troféu incompleto!</p>
+      }
+    </mat-list>
+  </mat-card>
 }

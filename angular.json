@@ -49,6 +49,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "allowedCommonJsDependencies": [
+              "dayjs"
+            ],
             "outputPath": "dist/st-achievements-front-end",
             "index": "src/index.html",
             "browser": "src/main.ts",

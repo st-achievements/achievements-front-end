@@ -10,7 +10,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { map } from 'rxjs';
-import { Achievement } from '../model/Achievement';
+import { Achievement } from '../model/achievement';
 import { MatList, MatListSubheaderCssMatStyler } from '@angular/material/list';
 import { MatDivider } from '@angular/material/divider';
 import { AchievementItemComponent } from './achievement-item/achievement-item.component';
@@ -22,7 +22,7 @@ import {
   MatOption,
   MatSelect,
 } from '@angular/material/select';
-import { Period } from '../model/Period';
+import { Period } from '../model/period';
 import { RouteParams } from '../route.params';
 import { MatCard } from '@angular/material/card';
 

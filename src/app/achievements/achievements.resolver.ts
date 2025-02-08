@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from '../authentication.service';
 import { API } from '../app.constants';
-import { Achievement } from '../model/Achievement';
+import { Achievement } from '../model/achievement';
 import { map, switchMap } from 'rxjs';
 import { PeriodService } from '../period.service';
 import { RouteParams } from '../route.params';

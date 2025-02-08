@@ -4,7 +4,7 @@ import {
   computed,
   input,
 } from '@angular/core';
-import { Achievement } from '../../model/Achievement';
+import { Achievement } from '../../model/achievement';
 import { DatePipe, DecimalPipe, NgOptimizedImage } from '@angular/common';
 import {
   MatListItem,
@@ -15,7 +15,7 @@ import {
 } from '@angular/material/list';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatIcon } from '@angular/material/icon';
-import { AchievementLevelEnum } from '../../model/AchievementLevelEnum';
+import { AchievementLevelEnum } from '../../model/achievement-level.enum';
 
 @Component({
   selector: 'app-achievement-item',

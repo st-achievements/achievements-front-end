@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { map, Observable, ReplaySubject, share, timer } from 'rxjs';
-import { Period } from './model/Period';
+import { Period } from './model/period';
 import { HttpClient } from '@angular/common/http';
 import { API } from './app.constants';
-import { Pagination } from './model/Pagination';
+import { Pagination } from './model/pagination';
 import dayjs from 'dayjs';
 
 @Injectable({ providedIn: 'root' })

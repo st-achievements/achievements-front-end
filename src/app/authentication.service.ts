@@ -9,7 +9,7 @@ import {
 import { filter, Observable, of, Subject, switchMap, take, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { User } from './model/User';
+import { User } from './model/user';
 import { assert } from './error/assert';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { API } from './app.constants';

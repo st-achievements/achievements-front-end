@@ -5,7 +5,7 @@
   left: 0;
   right: 0;
   z-index: 2;
-  background-color: var(--mat-sys-outline);
+  background-color: var(--mat-sys-background);
 }
 
 nav {

@@ -34,6 +34,8 @@ jobs:
         run: pnpx google-artifactregistry-auth --repo-config=.npmrc --credential-config=.npmrc
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Install additional dependencies
+        run: pnpm add @angular-devkit/core @angular-devkit/architect jsonc-parser -D
       - name: Install Firebase CLI
         run: pnpm install firebase-tools -g
       - name: Select firebase project

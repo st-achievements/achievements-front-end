@@ -14,7 +14,11 @@ export class PeriodService {
 
   getPeriods(): Observable<Period[]> {
     return (this.periods$ ??= this.httpClient
-      .get<Pagination<Period>>(`${API.PeriodManagement}/v1/periods`)
+      .get<Pagination<Period>>(`${API.PeriodManagement}/v1/periods`, {
+        params: {
+          endAt: dayjs().format('YYYY-MM-DD'),
+        },
+      })
       .pipe(
         map(({ items }) =>
           items.map((period) => {

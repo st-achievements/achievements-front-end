@@ -16,7 +16,7 @@ export class PeriodService {
     return (this.periods$ ??= this.httpClient
       .get<Pagination<Period>>(`${API.PeriodManagement}/v1/periods`, {
         params: {
-          endAt: dayjs().format('YYYY-MM-DD'),
+          endAt: dayjs().endOf('year').format('YYYY-MM-DD'),
         },
       })
       .pipe(

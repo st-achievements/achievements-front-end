@@ -12,6 +12,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./login/login.component').then((m) => m.LoginComponent),
     canActivate: [IsNotLoggedGuard()],
+    title: 'Login',
   },
   {
     path: 'achievements',
@@ -25,6 +26,7 @@ export const routes: Routes = [
       [RouteParams.r.periods]: PeriodsResolver(),
     },
     runGuardsAndResolvers: 'always',
+    title: 'My achievements',
   },
   {
     path: '**',

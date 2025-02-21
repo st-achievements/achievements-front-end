@@ -4,7 +4,10 @@ import {
   provideAppInitializer,
   provideExperimentalZonelessChangeDetection,
 } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import {
+  provideRouter,
+  TitleStrategy as NgTitleStrategy,
+} from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -19,9 +22,11 @@ import {
 } from '@angular/common/http';
 import { AuthenticationInterceptor } from './authentication.interceptor';
 import { LoadingInterceptor } from './loading.interceptor';
+import { TitleStrategy } from './title.strategy';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    { provide: NgTitleStrategy, useClass: TitleStrategy },
     provideExperimentalZonelessChangeDetection(),
     provideRouter(routes),
     provideAnimationsAsync(),

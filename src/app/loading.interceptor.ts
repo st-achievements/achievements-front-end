@@ -1,7 +1,7 @@
 import { HttpEventType, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { LoadingService } from './loading.service';
-import { delay, tap } from 'rxjs';
+import { tap } from 'rxjs';
 import { LoadingMessageContextToken } from './loading-message-context-token';
 
 export function LoadingInterceptor(): HttpInterceptorFn {
@@ -12,7 +12,6 @@ export function LoadingInterceptor(): HttpInterceptorFn {
       message,
     });
     return next(req).pipe(
-      delay(2500),
       tap((res) => {
         if (res.type === HttpEventType.Response) {
           loadingService.decrement();

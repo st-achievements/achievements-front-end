@@ -1,10 +1,11 @@
 import { inject, Injectable } from '@angular/core';
 import { map, Observable, ReplaySubject, share, timer } from 'rxjs';
 import { Period } from './model/period';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { API } from './app.constants';
 import { Pagination } from './model/pagination';
 import dayjs from 'dayjs';
+import { LoadingMessageContextToken } from './loading-message-context-token';
 
 @Injectable({ providedIn: 'root' })
 export class PeriodService {
@@ -18,6 +19,10 @@ export class PeriodService {
         params: {
           endAt: dayjs().endOf('year').format('YYYY-MM-DD'),
         },
+        context: new HttpContext().set(
+          LoadingMessageContextToken,
+          'Loading periods...',
+        ),
       })
       .pipe(
         map(({ items }) =>

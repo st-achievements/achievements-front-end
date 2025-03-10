@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
@@ -12,4 +12,6 @@ import { SpinnerComponent } from '../spinner/spinner.component';
       'loader cdk-overlay-backdrop cdk-overlay-dark-backdrop cdk-overlay-backdrop-showing',
   },
 })
-export class LoadingComponent {}
+export class LoadingComponent {
+  readonly message = input<string>();
+}

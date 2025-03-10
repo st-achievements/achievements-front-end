@@ -67,6 +67,7 @@ body {
 }
 
 .loader {
+  flex-direction: column;
   display: flex;
   cursor: wait;
   justify-content: center;

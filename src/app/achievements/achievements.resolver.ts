@@ -1,13 +1,11 @@
 import { ResolveFn } from '@angular/router';
 import { inject } from '@angular/core';
-import { HttpClient, HttpContext } from '@angular/common/http';
 import { AuthenticationService } from '../authentication.service';
-import { API } from '../app.constants';
 import { Achievement } from '../model/achievement';
 import { map, switchMap } from 'rxjs';
 import { PeriodService } from '../period.service';
 import { RouteParams } from '../route.params';
-import { LoadingMessageContextToken } from '../loading-message-context-token';
+import { AchievementsService } from './achievements.service';
 
 export function AchievementsResolver(): ResolveFn<Achievement[]> {
   return (snapshot) => {
@@ -23,23 +21,14 @@ export function AchievementsResolver(): ResolveFn<Achievement[]> {
         ),
       );
     const authenticationService = inject(AuthenticationService);
-    const http = inject(HttpClient);
+    const achievementsService = inject(AchievementsService);
     return period$.pipe(
       switchMap((period) => {
-        const id = period?.periodId ?? 1;
-        return http
-          .get<{
-            achievements: Achievement[];
-          }>(
-            `${API.UserAchievementGetter}/v1/users/${authenticationService.user().userId}/period/${id}/achievements`,
-            {
-              context: new HttpContext().set(
-                LoadingMessageContextToken,
-                'Loading achievements...',
-              ),
-            },
-          )
-          .pipe(map(({ achievements }) => achievements));
+        const periodId = period?.periodId ?? 1;
+        return achievementsService.getAchievements({
+          userId: authenticationService.user().userId,
+          periodId,
+        });
       }),
     );
   };

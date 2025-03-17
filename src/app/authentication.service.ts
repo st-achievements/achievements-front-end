@@ -12,8 +12,8 @@ import { HttpClient, HttpContext } from '@angular/common/http';
 import { User } from './model/user';
 import { assert } from './error/assert';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { API } from './app.constants';
 import { LoadingMessageContextToken } from './loading-message-context-token';
+import { environment } from '../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -22,12 +22,15 @@ export class AuthenticationService {
       this.#userFirebase.set(user);
       const getUser$: Observable<User | null> = user
         ? this.httpClient
-            .get<User>(`${API.UserManagement}/v1/users/external/${user.uid}`, {
-              context: new HttpContext().set(
-                LoadingMessageContextToken,
-                'Loading user...',
-              ),
-            })
+            .get<User>(
+              `${environment.UserManagementApi}/v1/users/external/${user.uid}`,
+              {
+                context: new HttpContext().set(
+                  LoadingMessageContextToken,
+                  'Loading user...',
+                ),
+              },
+            )
             .pipe(
               tap((user) => {
                 this.#user.set(user);

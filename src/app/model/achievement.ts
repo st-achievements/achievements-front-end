@@ -10,7 +10,7 @@ export interface Achievement {
   achievedAt: string;
   userId: number;
   periodId: number;
-  progress: AchievementProgress;
+  progress?: AchievementProgress;
 }
 
 export interface AchievementProgress {

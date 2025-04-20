@@ -1,25 +1,39 @@
 <app-navbar />
 
-<section class="control-panel">
-  <mat-form-field>
-    <mat-label>Ano</mat-label>
-    <mat-select [(ngModel)]="periodSelected">
-      @for (period of periods(); track period.periodId) {
-        <mat-option id="{{ period.periodId }}" [value]="period">
-          {{ period.year }}
-        </mat-option>
-      }
-    </mat-select>
-  </mat-form-field>
-</section>
-
 @let achievements = achievements$ | async;
 
 @if (achievements) {
-  <mat-card>
-    <mat-list>
-      <div mat-subheader>Completos</div>
+  @let total = achievements.completed.length + achievements.progress.length;
 
+  <section class="control-panel">
+    <mat-form-field>
+      <mat-label>Ano</mat-label>
+      <mat-select [(ngModel)]="periodSelected">
+        @for (period of periods(); track period.periodId) {
+          <mat-option id="{{ period.periodId }}" [value]="period">
+            {{ period.year }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <div class="completion">
+      @let percent = (achievements.completed.length / total) * 100;
+
+      {{ achievements.completed.length }} troféus de {{ total }} concluídos ({{
+        percent | number: '1.0-0'
+      }}%)
+      <mat-progress-bar [value]="percent"></mat-progress-bar>
+    </div>
+  </section>
+
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title
+        >Completos ({{ achievements.completed.length }})</mat-card-title
+      >
+    </mat-card-header>
+    <mat-card-content>
       @for (
         achievement of achievements.completed;
         track achievement.achievementId
@@ -30,10 +44,16 @@
       } @empty {
         <p>Nenhum troféu completo!</p>
       }
-      <mat-divider />
+    </mat-card-content>
+  </mat-card>
 
-      <div mat-subheader>Incompletos</div>
-
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>
+        Incompletos ({{ achievements.progress.length }})
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
       @for (
         achievement of achievements.progress;
         track achievement.achievementId
@@ -44,6 +64,6 @@
       } @empty {
         <p>Nenhum troféu incompleto!</p>
       }
-    </mat-list>
+    </mat-card-content>
   </mat-card>
 }

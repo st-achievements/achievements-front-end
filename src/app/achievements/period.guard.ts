@@ -6,19 +6,17 @@ import { map } from 'rxjs';
 
 export function PeriodGuard(): CanActivateFn {
   return (route) => {
-    const year = route.queryParamMap.get(RouteParams.q.year);
+    const yearParam = route.paramMap.get(RouteParams.p.year);
     const periods$ = inject(PeriodService).getPeriods();
     return periods$.pipe(
       map((periods) => {
         const isValidYear = periods.some(
-          (period) => period.year === Number(year),
+          (period) => period.year === Number(yearParam),
         );
         if (isValidYear) {
           return true;
         }
-        return createUrlTreeFromSnapshot(route, [], {
-          year: new Date().getFullYear(),
-        });
+        return createUrlTreeFromSnapshot(route, [new Date().getFullYear()]);
       }),
     );
   };

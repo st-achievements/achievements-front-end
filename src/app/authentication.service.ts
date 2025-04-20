@@ -68,7 +68,10 @@ export class AuthenticationService {
         filter((user) => !!user),
         take(1),
         switchMap(async () => {
-          await this.router.navigate(['/achievements']);
+          await this.router.navigate([
+            '/achievements',
+            new Date().getFullYear(),
+          ]);
         }),
       )
       .subscribe();

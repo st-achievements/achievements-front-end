@@ -5,14 +5,12 @@ import {
   inject,
   linkedSignal,
 } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, DecimalPipe } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Achievement } from '../model/achievement';
-import { MatList, MatListSubheaderCssMatStyler } from '@angular/material/list';
-import { MatDivider } from '@angular/material/divider';
 import { AchievementItemComponent } from './achievement-item/achievement-item.component';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { PeriodService } from '../period.service';
@@ -24,7 +22,13 @@ import {
 } from '@angular/material/select';
 import { Period } from '../model/period';
 import { RouteParams } from '../route.params';
-import { MatCard } from '@angular/material/card';
+import {
+  MatCard,
+  MatCardContent,
+  MatCardHeader,
+  MatCardTitle,
+} from '@angular/material/card';
+import { MatProgressBar } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-achievements',
@@ -32,15 +36,17 @@ import { MatCard } from '@angular/material/card';
     NavbarComponent,
     FormsModule,
     AsyncPipe,
-    MatList,
-    MatListSubheaderCssMatStyler,
-    MatDivider,
     AchievementItemComponent,
     MatSelect,
     MatOption,
     MatFormField,
     MatLabel,
     MatCard,
+    MatCardTitle,
+    MatCardHeader,
+    MatCardContent,
+    MatProgressBar,
+    DecimalPipe,
   ],
   templateUrl: './achievements.component.html',
   styleUrl: './achievements.component.css',
@@ -53,11 +59,7 @@ export class AchievementsComponent {
       if (!year) {
         return;
       }
-      this.router.navigate([], {
-        queryParams: {
-          year,
-        },
-        queryParamsHandling: 'merge',
+      this.router.navigate(['../', year], {
         relativeTo: this.activatedRoute,
       });
     });
@@ -70,20 +72,23 @@ export class AchievementsComponent {
   });
 
   readonly #year = toSignal(
-    this.activatedRoute.queryParamMap.pipe(
-      map((query) =>
+    this.activatedRoute.paramMap.pipe(
+      map((path) =>
         this.periods().find(
           (period) =>
             period.year ===
-            Number(query.get(RouteParams.q.year) ?? new Date().getFullYear()),
+            Number(path.get(RouteParams.p.year) ?? new Date().getFullYear()),
         ),
       ),
     ),
   );
 
-  periodSelected = linkedSignal(() => this.#year());
+  readonly periodSelected = linkedSignal(() => this.#year());
 
-  achievements$ = this.activatedRoute.data.pipe(
+  readonly achievements$: Observable<{
+    completed: Achievement[];
+    progress: Achievement[];
+  }> = this.activatedRoute.data.pipe(
     map((data) => data[RouteParams.r.achievements] as Achievement[]),
     map((achievements) => {
       const completed = achievements.filter(

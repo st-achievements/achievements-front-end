@@ -15,7 +15,7 @@ export const routes: Routes = [
     title: 'Login',
   },
   {
-    path: 'achievements',
+    path: `achievements/:${RouteParams.p.year}`,
     loadComponent: () =>
       import('./achievements/achievements.component').then(
         (m) => m.AchievementsComponent,
@@ -25,11 +25,10 @@ export const routes: Routes = [
       [RouteParams.r.achievements]: AchievementsResolver(),
       [RouteParams.r.periods]: PeriodsResolver(),
     },
-    runGuardsAndResolvers: 'always',
     title: 'My achievements',
   },
   {
     path: '**',
-    redirectTo: 'achievements',
+    redirectTo: () => `achievements/${new Date().getFullYear()}`,
   },
 ];

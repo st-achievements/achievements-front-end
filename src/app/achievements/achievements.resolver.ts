@@ -10,9 +10,12 @@ import { AchievementsService } from './achievements.service';
 export function AchievementsResolver(): ResolveFn<Achievement[]> {
   return (snapshot) => {
     const periodService = inject(PeriodService);
-    const year =
-      snapshot.queryParamMap.get(RouteParams.q.year) ??
-      new Date().getFullYear();
+    const year = snapshot.paramMap.get(RouteParams.p.year);
+    if (!year) {
+      throw new Error(
+        `Achievements resolver must have a ${RouteParams.p.year} path param defined`,
+      );
+    }
     const period$ = periodService
       .getPeriods()
       .pipe(

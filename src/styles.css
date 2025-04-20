@@ -1,6 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 @import '@angular/cdk/overlay-prebuilt.css';
 
+:root {
+  --breakpoint-sm: 36em; /* 576px */
+  --breakpoint-md: 48em; /* 768px */
+  --breakpoint-lg: 64em; /* 1024px */
+  --breakpoint-xl: 80em; /* 1280px */
+}
+
 html,
 body {
   height: 100%;

@@ -1,7 +1,7 @@
 export const environment = {
-  UserAchievementGetter:
+  UserAchievementGetterApi:
     'https://usr-achievement-getter-http-a6okgsceua-rj.a.run.app',
-  UserManagement: 'https://usr-user-management-http-a6okgsceua-rj.a.run.app',
-  PeriodManagement:
+  UserManagementApi: 'https://usr-user-management-http-a6okgsceua-rj.a.run.app',
+  PeriodManagementApi:
     'https://cfg-period-management-http-a6okgsceua-rj.a.run.app',
 } as const;

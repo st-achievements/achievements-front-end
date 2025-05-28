@@ -6,4 +6,7 @@ export const RouteParams = {
   q: {
     year: 'year',
   },
+  p: {
+    year: 'year',
+  },
 } as const;

@@ -1,5 +1,6 @@
 :host {
-  display: block;
+  display: grid;
+  grid-template-columns: minmax(0, 100px) minmax(0, 1fr);
   border-radius: 6px;
   margin-bottom: 0.25rem;
   margin-left: 0.25rem;
@@ -8,18 +9,107 @@
   transition: background 0.3s;
 
   &:hover {
-    background-color: var(--mat-sys-secondary-container);
+    .body {
+      background-color: var(--mat-sys-secondary-container);
+    }
+  }
+
+  &.bronze {
+    mat-icon {
+      color: #cd7f32;
+    }
+  }
+  &.silver {
+    mat-icon {
+      color: silver;
+    }
+  }
+  &.gold {
+    mat-icon {
+      color: gold;
+    }
+  }
+
+  &:not(.achieved) {
+    mat-icon {
+      opacity: 0.25;
+    }
+
+    .description {
+      padding-bottom: 0.5rem;
+    }
   }
 }
 
-.trophy {
-  &.bronze {
-    color: #cd7f32;
+.img {
+  padding: 0.5rem;
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  background-color: var(--mat-sys-on-secondary);
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 150px);
+  /*background-color: var(--mat-sys-surface-bright);*/
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  justify-content: flex-end;
+  padding-right: 0.5rem;
+  mat-icon {
+    justify-self: flex-end;
   }
-  &.silver {
-    color: silver;
+}
+
+.title {
+  padding-top: 0.5rem;
+  padding-left: 0.5rem;
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin-bottom: 0.15rem;
+}
+
+.description {
+  opacity: 0.8;
+  padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+
+.extra {
+  padding-left: 0.5rem;
+  font-size: 0.75rem;
+  opacity: 0.65;
+  padding-bottom: 0.5rem;
+
+  &.end {
+    text-align: end;
   }
-  &.gold {
-    color: gold;
+}
+
+.completion {
+  font-size: 0.75rem;
+  opacity: 0.65;
+}
+
+mat-progress-bar {
+  grid-column: 1 / -1;
+  border-bottom-right-radius: 5px;
+}
+
+@media screen and (max-width: 599px) and (orientation: portrait) {
+  :host {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .body {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 36px);
   }
 }

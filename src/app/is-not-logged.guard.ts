@@ -8,7 +8,9 @@ export function IsNotLoggedGuard(): CanActivateFn {
     const router = inject(Router);
     const isLogged = !!authenticationService.userFirebase();
     if (isLogged) {
-      return new RedirectCommand(router.parseUrl('/achievements'));
+      return new RedirectCommand(
+        router.parseUrl(`/achievements/${new Date().getFullYear()}`),
+      );
     }
     return true;
   };

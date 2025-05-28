@@ -1,43 +1,50 @@
 @let ach = achievement();
+@let imgUrl = ach.achievementImageUrl;
 
-<mat-list-item>
-  <img
-    matListItemAvatar
-    [ngSrc]="
-      ach.achievementImageUrl ||
-      'https://cdn.fastly.steamstatic.com/steamcommunity/public/images/apps/500/2c92650ca214271a191e37c54e2ae9c92d82e160.jpg'
-    "
-    [alt]="ach.achievementDescription"
-    height="40"
-    width="40"
-  />
-  @if (ach.achievedAt) {
-    <div matListItemMeta>
-      <mat-icon [class]="['trophy', levelClassName()]">emoji_events</mat-icon>
-    </div>
-  }
+@if (!deviceService.isMobile()) {
+  <section class="img" [class.no-img]="noImgTitle()">
+    @if (imgUrl) {
+      {{ imgUrl }}
+    } @else {
+      {{ noImgTitle() }}
+    }
+  </section>
+}
 
-  <span matListItemTitle>
-    {{ ach.achievementName }}
-  </span>
-  <span matListItemLine>
-    {{ ach.achievementDescription }}
-  </span>
+<section class="body">
+  <section>
+    <div class="title">{{ ach.achievementName }}</div>
 
-  @if (ach.achievedAt) {
-    <span matListItemLine>
-      Feito em {{ ach.achievedAt | date: 'medium' }}
-    </span>
-  }
+    <div class="description">{{ ach.achievementDescription }}</div>
+
+    @if (ach.achievedAt) {
+      <div class="extra">
+        Feito em
+        {{ ach.achievedAt | date: "dd 'de' MMM 'de' yyyy 'às' HH:mm" }}
+      </div>
+    }
+  </section>
+
+  <section class="icon">
+    <mat-icon>emoji_events</mat-icon>
+    @if (ach.progress && !deviceService.isMobile()) {
+      <span class="completion">
+        {{ ach.progress.quantity | number: '1.0-0' }} /
+        {{ ach.progress.required | number: '1.0-0' }} ({{
+          (ach.progress.quantity / ach.progress.required) * 100
+            | number: '1.0-0'
+        }}%)
+      </span>
+    }
+  </section>
 
   @if (ach.progress) {
-    <span matListItemLine>
-      {{ ach.progress.quantity | number: '1.0-0' }} /
-      {{ ach.progress.required | number: '1.0-0' }}
-      <mat-progress-bar
-        mode="determinate"
-        [value]="(ach.progress.quantity / ach.progress.required) * 100"
-      />
-    </span>
+    <!--    {{ ach.progress.quantity | number: '1.0-0' }} /-->
+    <!--    {{ ach.progress.required | number: '1.0-0' }}-->
+    <mat-progress-bar
+      class="full"
+      mode="determinate"
+      [value]="(ach.progress.quantity / ach.progress.required) * 100"
+    />
   }
-</mat-list-item>
+</section>

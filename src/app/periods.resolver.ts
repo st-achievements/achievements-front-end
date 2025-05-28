@@ -4,5 +4,5 @@ import { inject } from '@angular/core';
 import { PeriodService } from './period.service';
 
 export function PeriodsResolver(): ResolveFn<Period[]> {
-  return () => inject(PeriodService).getPeriods();
+  return () => inject(PeriodService).periods$;
 }

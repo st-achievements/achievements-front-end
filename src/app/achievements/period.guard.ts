@@ -7,7 +7,7 @@ import { map } from 'rxjs';
 export function PeriodGuard(): CanActivateFn {
   return (route) => {
     const yearParam = route.paramMap.get(RouteParams.p.year);
-    const periods$ = inject(PeriodService).getPeriods();
+    const periods$ = inject(PeriodService).periods$;
     return periods$.pipe(
       map((periods) => {
         const isValidYear = periods.some(

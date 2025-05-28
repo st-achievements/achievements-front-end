@@ -16,13 +16,9 @@ export function AchievementsResolver(): ResolveFn<Achievement[]> {
         `Achievements resolver must have a ${RouteParams.p.year} path param defined`,
       );
     }
-    const period$ = periodService
-      .getPeriods()
-      .pipe(
-        map((periods) =>
-          periods.find((period) => period.year === Number(year)),
-        ),
-      );
+    const period$ = periodService.periods$.pipe(
+      map((periods) => periods.find((period) => period.year === Number(year))),
+    );
     const authenticationService = inject(AuthenticationService);
     const achievementsService = inject(AchievementsService);
     return period$.pipe(

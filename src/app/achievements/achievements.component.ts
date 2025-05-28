@@ -67,7 +67,7 @@ export class AchievementsComponent {
 
   private readonly router = inject(Router);
   private readonly activatedRoute = inject(ActivatedRoute);
-  readonly periods = toSignal(inject(PeriodService).getPeriods(), {
+  readonly periods = toSignal(inject(PeriodService).periods$, {
     initialValue: [] as Period[],
   });
 

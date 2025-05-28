@@ -20,9 +20,15 @@
     <div class="completion">
       @let percent = (achievements.completed.length / total) * 100;
 
-      {{ achievements.completed.length }} troféus de {{ total }} concluídos ({{
-        percent | number: '1.0-0'
-      }}%)
+      @if (deviceService.isMobile()) {
+        {{ achievements.completed.length }} / {{ total }} ({{
+          percent | number: '1.0-0'
+        }}%)
+      } @else {
+        {{ achievements.completed.length }} troféus de {{ total }} concluídos
+        ({{ percent | number: '1.0-0' }}%)
+      }
+
       <mat-progress-bar [value]="percent"></mat-progress-bar>
     </div>
   </section>

@@ -103,3 +103,13 @@ mat-progress-bar {
   grid-column: 1 / -1;
   border-bottom-right-radius: 5px;
 }
+
+@media screen and (max-width: 599px) and (orientation: portrait) {
+  :host {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .body {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 36px);
+  }
+}

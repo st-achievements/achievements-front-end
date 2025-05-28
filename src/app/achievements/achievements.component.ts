@@ -29,6 +29,7 @@ import {
   MatCardTitle,
 } from '@angular/material/card';
 import { MatProgressBar } from '@angular/material/progress-bar';
+import { DeviceService } from '../device.service';
 
 @Component({
   selector: 'app-achievements',
@@ -70,6 +71,8 @@ export class AchievementsComponent {
   readonly periods = toSignal(inject(PeriodService).periods$, {
     initialValue: [] as Period[],
   });
+
+  readonly deviceService = inject(DeviceService);
 
   readonly #year = toSignal(
     this.activatedRoute.paramMap.pipe(

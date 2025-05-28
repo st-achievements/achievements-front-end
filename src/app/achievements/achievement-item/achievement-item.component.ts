@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  inject,
   input,
 } from '@angular/core';
 import { Achievement } from '../../model/achievement';
@@ -9,6 +10,7 @@ import { AchievementLevelEnum } from '../../model/achievement-level.enum';
 import { MatIcon } from '@angular/material/icon';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { MatProgressBar } from '@angular/material/progress-bar';
+import { DeviceService } from '../../device.service';
 
 @Component({
   selector: 'app-achievement-item',
@@ -23,6 +25,8 @@ import { MatProgressBar } from '@angular/material/progress-bar';
 })
 export class AchievementItemComponent {
   readonly achievement = input.required<Achievement>();
+
+  readonly deviceService = inject(DeviceService);
 
   private readonly levelClassNames: Record<number, string> = {
     [AchievementLevelEnum.Bronze]: 'bronze',

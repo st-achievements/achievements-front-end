@@ -8,7 +8,10 @@
   <section class="control-panel">
     <mat-form-field>
       <mat-label>Ano</mat-label>
-      <mat-select [(ngModel)]="periodSelected">
+      <mat-select
+        [(ngModel)]="periodSelected"
+        (ngModelChange)="onPeriodChange($event)"
+      >
         @for (period of periods(); track period.periodId) {
           <mat-option id="{{ period.periodId }}" [value]="period">
             {{ period.year }}

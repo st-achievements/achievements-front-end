@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  effect,
   inject,
   linkedSignal,
 } from '@angular/core';
@@ -54,18 +53,6 @@ import { DeviceService } from '../device.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AchievementsComponent {
-  constructor() {
-    effect(() => {
-      const year = this.periodSelected()?.year;
-      if (!year) {
-        return;
-      }
-      this.router.navigate(['../', year], {
-        relativeTo: this.activatedRoute,
-      });
-    });
-  }
-
   private readonly router = inject(Router);
   private readonly activatedRoute = inject(ActivatedRoute);
   readonly periods = toSignal(inject(PeriodService).periods$, {
@@ -106,4 +93,10 @@ export class AchievementsComponent {
       };
     }),
   );
+
+  onPeriodChange($event: Period) {
+    this.router.navigate(['../', $event.year], {
+      relativeTo: this.activatedRoute,
+    });
+  }
 }

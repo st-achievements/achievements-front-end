@@ -1,4 +1,5 @@
 export const environment = {
+  production: false,
   UserAchievementGetterApi:
     'https://usr-achievement-getter-http-a6okgsceua-rj.a.run.app',
   UserManagementApi: 'https://usr-user-management-http-a6okgsceua-rj.a.run.app',

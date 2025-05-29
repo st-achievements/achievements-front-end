@@ -3,7 +3,6 @@
 
 module.exports = function (config) {
   config.set({
-    autoWatch: false,
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
@@ -33,7 +32,7 @@ module.exports = function (config) {
       reporters: [{ type: 'html' }, { type: 'text-summary' }],
     },
     reporters: ['progress', 'kjhtml'],
-    browsers: ['Chrome'],
-    restartOnFileChange: false,
+    browsers: ['ChromeHeadless'],
+    restartOnFileChange: true,
   });
 };

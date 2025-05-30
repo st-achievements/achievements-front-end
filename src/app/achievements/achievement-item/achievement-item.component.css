@@ -113,4 +113,8 @@ mat-progress-bar {
     grid-template-columns: minmax(0, 1fr) minmax(0, 36px);
     border-radius: 6px;
   }
+
+  mat-progress-bar {
+    border-bottom-left-radius: 5px;
+  }
 }
